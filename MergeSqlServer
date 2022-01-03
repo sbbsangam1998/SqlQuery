@@ -1,0 +1,28 @@
+--Merge in Sql Server
+
+Create Table StudentSource(ID int ,Name varchar(20))
+Create Table StudentTarget(ID int ,Name varchar(20))
+
+Insert into StudentSource values('1','Mike')
+Insert into StudentSource values('2','Sara')
+
+Insert into StudentTarget values('1','Mike M')
+Insert into StudentTarget values('3','john')
+
+select * from StudentSource
+select * from StudentTarget
+
+Merge StudentTarget As T
+using StudentSource AS S
+on T.ID=S.ID
+When Matched Then 
+update Set T.Name=S.Name
+When Not Matched By Target Then
+Insert (ID,Name) Values(S.ID,S.Name);
+--When Not Matched By Source Then
+--Delete;
+ --Real Time we dont perform Delete
+Delete from StudentSource
+Delete from StudentTarget
+
+Drop Table StudentSource,StudentTarget
