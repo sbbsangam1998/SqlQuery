@@ -1,0 +1,12 @@
+Create Table Employees (ID int identity Primary key,FirstName varchar(50),MiddleName varchar(50),LastName varchar(50))
+Insert into Employees Values('Sam',NULL,NULL)
+Insert into Employees Values(NULL,'Todd','Tarzan')
+Insert into Employees Values(NULL,NULL,'Sara')
+Insert into Employees Values('Ben','Parker',NULL)
+Insert into Employees Values('James','Nick','Nancy')
+select * from Employees
+select Id,COALESCE(FirstName,MiddleName,LastName) as Name from Employees
+select * from Employees
+select Id,COALESCE(FirstName,MiddleName) as Name from Employees
+--COALESCE()=>Returns the first non-null Value
+Drop Table Employees
