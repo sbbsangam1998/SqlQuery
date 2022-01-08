@@ -1,0 +1,71 @@
+if(Exists(select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME='tblProductSales'))
+Begin
+Drop table tblProductSales
+End
+if(Exists(select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME='tblProducts'))
+Begin
+Drop table tblProductSales
+End
+
+-- Recreate tables
+Create Table tblProducts
+(
+ [Id] int identity primary key,
+ [Name] nvarchar(50),
+ [Description] nvarchar(250)
+)
+
+Create Table tblProductSales
+(
+ Id int primary key identity,
+ ProductId int foreign key references tblProducts(Id),
+ UnitPrice int,
+ QuantitySold int
+)
+
+--Insert Sample data into tblProducts table
+Declare @Id int
+Set @Id=1
+
+While(@Id<=30000)
+Begin
+Insert into tblProducts values('Product -'+Cast(@Id as varchar(100)),'Description -'+Cast(@Id as varchar(100)))
+Print @Id
+Set @Id=@Id+1
+End
+
+select * from tblProducts
+select * from tblProductSales
+
+declare @RandomProductId int
+declare @RandomUnitPrice int
+declare @RandomQuantitySold int
+
+--Upper and Lower Limit =->ProductId
+declare @LowerProductId int=1
+declare @UpperProductId int=100000
+
+--Upper and Lower Limit =->UnitPrice
+declare @LowerPrice int=1
+declare @UpperPrice int=100
+
+--Upper and Lower Limit =->QuantitySold
+declare @LowerQuantitySold int=1
+declare @UpperQuantitySold int=10
+
+Declare @Counter int
+set @Counter=1
+While(@Counter<=450000)
+Begin
+ select @RandomProductId=Round(((@UpperProductId-@LowerProductId))*RAND()+1,0) 
+ select @RandomUnitPrice=Round(((@UpperPrice-@LowerPrice))*RAND()+1,0)  
+  select @RandomQuantitySold=Round(((@UpperQuantitySold-@LowerQuantitySold))*RAND()+1,0)  
+  Insert into tblProductSales values(@RandomProductId,@RandomUnitPrice,@RandomUnitPrice)
+  Set @Counter=@Counter+1
+End
+
+
+
+
+select * from tblProducts
+select * from tblProductSales
