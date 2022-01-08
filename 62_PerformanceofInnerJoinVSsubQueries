@@ -1,0 +1,29 @@
+CHECKPOINT; 
+GO 
+DBCC DROPCLEANBUFFERS; -- Clears query cache
+Go
+DBCC FREEPROCCACHE; -- Clears execution plan cache
+GO
+
+select * from tblProducts
+select * from tblProductSales
+
+select Name,Description from tblProducts where Id  in (select ProductId from tblProductSales)
+GO
+select distinct tblProducts.Id, tblProducts.Name, tblProducts.Description from tblProducts join tblProductSales on tblProducts.Id=tblProductSales.ProductId
+GO
+--select  tblProducts.Id, tblProducts.Name, tblProducts.Description, tblProductSales.ProductId,tblProductSales.QuantitySold from tblProducts join tblProductSales on tblProducts.Id=tblProductSales.ProductId
+--GO
+select Name,Description from tblProducts where not Exists  (select * from tblProductSales where tblProductSales.ProductId=tblProducts.Id)
+GO
+select * from tblProducts left join tblProductSales on tblProducts.Id=tblProductSales.ProductId where tblProductSales.ProductId IS NULL
+
+--Estimated Query Execution Plan
+--Client Statistics	
+delete from tblProductSales
+Drop Table tblProductSales
+drop Table  tblProducts
+
+
+select * from tblProducts
+select * from tblProductSales
