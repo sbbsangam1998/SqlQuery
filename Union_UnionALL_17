@@ -1,0 +1,39 @@
+Create Table tblIndiaCustomers(Id int ,Name varchar(20),Email varchar(20))
+Create Table tblUKCustomers (Id int ,Name varchar(20),Email varchar(20))
+GO
+Insert into tblIndiaCustomers values(1,'Raj','R@Rgmail.com'),
+(2,'Sam','S@Sgmail.com')
+Go
+Insert into tblUKCustomers values(1,'Ben','B@Bgmail.com'),
+(2,'Sam','S@Sgmail.com')
+Go
+select * from tblIndiaCustomers
+Select * from tblUKCustomers
+--Error {order,no,datatype} should be same 
+--select Name,ID from tblIndiaCustomers Union select ID,Name from tblUKCustomers 
+select * from tblIndiaCustomers Union select * from tblUKCustomers 
+
+select * from tblIndiaCustomers Union All select * from tblUKCustomers 
+update tblIndiaCustomers Set Name='Mack' where Name='Sam'
+
+--select * from tblIndiaCustomers order by Name Union select * from tblUKCustomers 
+--[cannot use order by in between]
+select * from tblIndiaCustomers  Union select * from tblUKCustomers 
+select * from tblIndiaCustomers  Union select * from tblUKCustomers order by Name
+
+--*union removes duplicates && union all doesnot removes duplicates
+
+update tblIndiaCustomers Set Name='Mack' where Name='Sam'
+select * from tblIndiaCustomers
+Select * from tblUKCustomers
+
+select * from tblIndiaCustomers  Union select * from tblUKCustomers 
+
+select * from tblIndiaCustomers  Union all select * from tblUKCustomers 
+
+update tblIndiaCustomers Set Name='Sam' where Name='Mack'
+
+--Estimated query Execution Plan -Ctrl+L
+
+Drop Table tblIndiaCustomers
+Drop Table tblUKCustomers
