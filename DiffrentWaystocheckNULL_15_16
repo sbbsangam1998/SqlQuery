@@ -1,0 +1,33 @@
+Create Table tblEmployees(EmployeeID int,Name varchar(15),ManagerId int)
+GO
+Insert into tblEmployees values(1,'Mike',3)
+Insert into tblEmployees values(2,'Robb',1)
+Insert into tblEmployees values(3,'todd',NULL)
+Insert into tblEmployees values(4,'Ben',1)
+Insert into tblEmployees values(5,'Sam',1)
+GO
+select * from tblEmployees
+
+select E.Name,M.Name from tblEmployees E left join tblEmployees M
+on  E.ManagerId=M.EmployeeID
+GO
+--ISNULL Function
+select E.Name,ISNULL(M.Name,'No Manager')[Manager Name] from tblEmployees E left join tblEmployees M
+on  E.ManagerId=M.EmployeeID
+GO
+--COALESCE Function
+select E.Name,COALESCE(M.Name,'No Manager') [Manager Name] from tblEmployees E left join tblEmployees M
+on  E.ManagerId=M.EmployeeID
+GO
+--Using Case 
+select E.Name,
+Case when M.Name IS Null
+Then 'No Manager'
+else
+M.Name
+End
+as [Manager Name]
+from tblEmployees E left join tblEmployees M
+on  E.ManagerId=M.EmployeeID
+GO
+Drop Table tblEmployees
