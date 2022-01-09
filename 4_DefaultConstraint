@@ -1,0 +1,31 @@
+Create table Gender(
+ID int identity Primary key,
+Name varchar(40)
+
+)
+Create table tblStudents
+(
+ ID int  identity Primary key,
+ Name varchar(50),
+ GenderId int foreign key references Gender(Id),
+)
+
+insert into Gender values('Male')
+insert into Gender values('Female')
+insert into Gender values('Unknown')
+
+insert into tblStudents values('Ram',1),('Joy',2),('Mak',2),('Ben',3),('Jim',1)
+
+select * from  Gender
+select * from tblStudents
+
+ALter table tblStudents add constraint tblStudents_Gender_Default
+Default 3 for GenderId
+Insert into tblStudents values('Lucky') --Number of supplied value does not match use below syntax
+Insert into tblStudents(Name) values('Jam')
+
+Insert into tblStudents(Name,GenderId) values('Ravi',NULL)
+
+select * from tblStudents
+
+Drop table tblStudents,Gender
