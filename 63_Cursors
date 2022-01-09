@@ -1,0 +1,103 @@
+Create Table tblProducts(ID int identity Primary key ,Name varchar(50), Description varchar(50))
+
+Create Table tblProductSales(
+ID int identity Primary key
+,ProductId int foreign key references tblProducts(ID)
+,UnitPrice int
+,QtySold int)
+
+Insert into tblProducts Values('TV','52 inch black LCD TV')
+Insert into tblProducts Values('Laptop','Very thin Black Color Acer Laptop')
+Insert into tblProducts Values('Desktop','HP High Performance Desktop')
+
+Insert into tblProductSales Values(3,450,5)
+Insert into tblProductSales Values(2,250,7)
+Insert into tblProductSales Values(3,450,7)
+Insert into tblProductSales Values(3,450,9)
+
+Declare @Id int,@Name varchar(50)
+--Declare the cursor using the declare keyword
+Declare mycursor Cursor FOR 
+select Id ,Name from tblProducts
+-- Open statement, executes the SELECT statment
+-- and populates the result set
+open mycursor
+ --Fetch the row from the result set into the variable
+Fetch next from mycursor into @Id,@Name
+--if zero cursor has records
+while(@@FETCH_STATUS=0) 
+Begin
+Print Cast(@Id as varchar)+' '+@Name
+Fetch next from mycursor into @Id,@Name
+End
+-- Release the row set
+close mycursor
+-- Deallocate, the resources associated with the cursor
+deallocate mycursor
+
+drop table tblProductSales,tblProducts
+
+
+________________________________________________________________________________________________________________
+
+Create Table tblProducts(ID int identity Primary key ,Name varchar(50), Description varchar(50))
+
+Create Table tblProductSales(
+ID int identity Primary key
+,ProductId int foreign key references tblProducts(ID)
+,UnitPrice int
+,QtySold int)
+
+Insert into tblProducts Values('TV','52 inch black LCD TV')
+Insert into tblProducts Values('Laptop','Very thin Black Color Acer Laptop')
+Insert into tblProducts Values('Desktop','HP High Performance Desktop')
+
+Insert into tblProductSales Values(3,450,5)
+Insert into tblProductSales Values(2,250,7)
+Insert into tblProductSales Values(3,450,7)
+Insert into tblProductSales Values(3,450,9)
+
+
+select * from tblProducts
+
+select * from tblProductSales
+
+Declare @productId int
+--Declare the cursor using the declare keyword
+Declare mycursornew Cursor FOR 
+select ProductId from tblProductSales
+-- Open statement, executes the SELECT statment
+-- and populates the result set
+open mycursornew
+ --Fetch the row from the result set into the variable
+Fetch next from mycursornew into @productId
+--if zero cursor has records
+while(@@FETCH_STATUS=0)
+Begin
+--print 'First inside while'
+Declare @Name varchar(100)
+select @Name=Name from tblProducts where ID=@productId
+    if(@Name='Laptop')
+	Begin
+	update tblProductSales set QtySold=600 where ProductId=@productId
+	--print 'Laptop updated'
+	End
+	else if(@Name='Desktop')
+	Begin
+	update tblProductSales set QtySold=600 where ProductId=@productId
+	--print 'Desktop updated'
+	End
+Fetch next from mycursornew into @productId
+	--print 'out from'
+End
+-- Release the row set
+close mycursornew
+-- Deallocate, the resources associated with the cursor
+deallocate mycursornew
+
+drop table tblProductSales,tblProducts
+
+
+checkpoint;
+DBcc DropcleanBuffers
+DBCC FreeProcCache
