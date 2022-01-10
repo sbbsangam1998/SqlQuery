@@ -39,6 +39,23 @@ JOIN tblProducts
 WHERE Name = 'Laptop'
 OR Name = 'Desktop'
 
+UPDATE tblProductSales
+SET QtySold =
+             CASE
+               WHEN Name = 'Lap' THEN '255'
+               WHEN Name = 'Desk' THEN '135'
+			   --Else
+			   --QtySold
+             END
+FROM tblProductSales
+JOIN tblProducts
+  ON tblProductSales.ProductId = tblProducts.Id
+WHERE Name = 'Laptop'
+OR Name = 'Desktop'
+
+
+
+
 SELECT
   *
 FROM tblProducts
