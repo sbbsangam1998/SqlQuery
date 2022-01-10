@@ -1,0 +1,59 @@
+Create table Gender(
+ID int identity Primary key,
+Name varchar(40)
+
+)
+Create table tblStudents
+(
+ ID int  identity Primary key,
+ Name varchar(50),
+ GenderId int foreign key references Gender(Id),
+)
+
+insert into Gender values('Male')
+insert into Gender values('Female')
+insert into Gender values('Unknown')
+
+insert into tblStudents values('Ram',1),('Joy',2),('Mak',2),('Ben',3),('Jim',1)
+
+
+
+ALter table tblStudents add constraint tblStudents_Gender_Default
+Default 3 for GenderId
+--1)No action 2)Default 3)NULL 4)Cascade ---Delete Rule
+select * from  Gender
+select * from tblStudents
+delete from Gender where ID=3
+
+Drop table tblStudents ,Gender
+GO
+
+_______________________________________________________________________________________________________________________________________________
+
+--Check for 2) Default Action {if constraints are not defined} - then depend on column whether it null or not  ,it contain value
+
+Create table Gender(
+ID int identity Primary key,
+Name varchar(40)
+
+)
+
+Create table tblStudents
+(
+ ID int  identity Primary key,
+ Name varchar(50),
+ GenderId int foreign key references Gender(Id),
+)
+
+insert into Gender values('Male')
+insert into Gender values('Female')
+insert into Gender values('Unknown')
+
+insert into tblStudents values('Ram',1),('Joy',2),('Mak',2),('Ben',3),('Jim',1)
+
+select * from  Gender
+select * from tblStudents
+delete from Gender where ID=3
+
+
+Drop table tblStudents ,Gender
