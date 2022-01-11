@@ -1,0 +1,17 @@
+--Alter Database table Without Dropping table
+
+Create Table Student (Id int ,Name varchar(100),Salary varchar(2000))
+
+insert into Student values (1,'Sanjay',5000)
+insert into Student values (2,'Sanjay',5000)
+insert into Student values (3,'Sam',5000)
+insert into Student values (4,'Joy',5000)
+ALter Table Student ALter Column Salary int --Query & by table designer
+
+select * from Student
+
+
+select Name,Sum(Salary) TotalSalary  from Student
+Group by Name
+Go
+Drop Table Student
