@@ -1,0 +1,14 @@
+--Get the list of tables
+select * from sysobjects where xtype='U'
+--  U-user table ,P-Stored Procedure ,IT-Internal Tables , S-System Tables,V-Views ,PK-Primary key Constraint
+--Get the list of tables
+select * from sys.tables
+select * from sys.views
+--Get the list of tables and views
+select * from INFORMATION_SCHEMA.TABLES
+
+--List of Different xtype(Objects)
+select distinct xtype from SysObjects
+
+--List of Xtype Refer below Link
+--https://docs.microsoft.com/en-us/sql/relational-databases/system-compatibility-views/sys-sysobjects-transact-sql?view=sql-server-ver15
