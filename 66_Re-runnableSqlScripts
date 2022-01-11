@@ -1,0 +1,58 @@
+Create Table Student(ID int ,Name Varchar(250)) 
+Drop table Student
+If not Exists(Select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME='Student')
+Begin
+Create Table Student(ID int ,Name Varchar(250)) 
+print 'Table Created'
+End
+Else
+Begin
+print 'Table Exist Already'
+End
+Go
+--_________________________________________________________
+
+If OBJECT_ID('Student') is NULL
+Begin
+Create Table Student(ID int ,Name Varchar(250)) 
+print 'Table Created'
+End
+Else
+Begin
+print 'Table Exist Already'
+End
+--______________________________________________________________________
+If OBJECT_ID('Student') is not  NULL
+Begin
+Drop table Student
+print 'Table Dropped'
+End
+Create Table Student(ID int ,Name Varchar(250)) 
+GO
+
+
+--___________________________________________________________
+----The below is not rerunnable script 
+ALter table Student Add Gender varchar(10)
+GO
+
+--Check for Existence of columns
+
+Use CalTrans_Dev
+if not exists (select * from INFORMATION_SCHEMA.COLUMNS where COLUMN_NAME='Gender' AND TABLE_NAME='Student' AND TABLE_SCHEMA='dbo')
+Begin
+ALter table Student Add Gender varchar(10)
+End
+Else
+print 'Column already exist'
+GO
+
+--___________________________________________________________
+
+if COL_LENGTH('Student','Gender') is NULL
+Begin
+ALter table Student Add Gender varchar(10)
+End
+Else
+print 'Column already exist'
+GO
