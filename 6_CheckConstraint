@@ -1,0 +1,25 @@
+CREATE TABLE [dbo].[tblStudents](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[Age] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+--Delete from tblStudents where ID=6
+
+select * from tblStudents
+
+Alter table tblStudents Add Constraint CK_tblStudents check (Age>0 AND Age<150)
+
+insert into tblStudents values('Abrahim',-456) --this will not allow after check constraint inserted.
+
+insert into tblStudents values('Abrahim',NULL) --correct
+
+Alter table tblStudents Drop Constraint CK_tblStudents
+
+Drop table tblStudents
