@@ -1,0 +1,26 @@
+Create table Person (
+ID int Identity(1,1) Primary Key,
+Name varchar(Max)
+)
+Insert into Person Values('Joy')
+select * from Person
+
+Insert into Person Values(2,'Rommy') --error 
+
+set Identity_Insert Person ON
+
+Insert into Person (ID,Name) Values(2,'Rommy')
+
+select * from Person
+
+delete from Person where ID=1
+
+select * from Person
+
+Insert into Person (ID,Name) Values(1,'Raj')
+
+set Identity_Insert Person OFF
+
+Insert into Person (ID,Name) Values(3,'Reshma') --error
+
+drop table Person
