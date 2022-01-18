@@ -1,0 +1,65 @@
+--Dynamic Sql-Sql built from strings at runtime
+
+Declare @sql nvarchar(500)
+Declare @params nvarchar(1000)
+Declare @FirstName varchar(500)
+Declare @LastName varchar(500)
+
+
+set @sql='select * from Employees '+' where FirstName=@FirstName AND LastName=@LastName'
+set @params='@FirstName varchar(500),@LastName varchar(500)'
+print @sql
+
+exec sp_executesql @sql,@params,@FirstName='Joy',@LastName='marker'
+
+
+
+
+Create table Employees(
+Id int identity(1,1) Primary key,
+FirstName varchar(500),
+LastName varchar(500),
+Age int 
+)
+
+Drop table Employees
+Insert into Employees values('Joy','marker',20),('mike','Brouce',21),('Sikha','pandey',35),('Tim','berner',45)
+Insert into Employees values('Joy','marker',22)
+select * from Employees
+
+
+use Sample
+select  top 100 percent * from Employees 
+select top 1 * from  Employees order by Id Desc
+
+select * from Employees order by FirstName desc,Age desc
+
+select * from Employees where LastName like '_a%'
+
+select * from Employees where LastName like '[mp]%'
+
+
+select * from Employees where LastName like '[^mp]%'
+
+select * from Employees where Age <>20
+
+select Distinct FirstName,age from Employees
+
+select  FirstName from Employees
+
+select * from Employees where  ID not in(2,4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
